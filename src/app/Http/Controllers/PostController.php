@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -13,7 +16,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('post.index');
+        $user = User::findOrFail(Auth::id());
+        $posts = $user->posts;
+
+        return view('post.index', compact('user', 'posts'));
     }
 
     /**
@@ -34,7 +40,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->title, $request->message);
+        Post::create([
+            'user_id' => Auth::id(),
+            'title' => $request->title,
+            'message' => $request->message
+        ]);
+
         return redirect()->route('post.index');
     }
 
