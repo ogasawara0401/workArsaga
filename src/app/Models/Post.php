@@ -18,4 +18,20 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeSearchKeyword($query, $keyword)
+    {
+        if (!is_null($keyword)) {
+            $spaceConvert = mb_convert_kana($keyword, 's');
+            $keywords = preg_split('/[\s]+/', $spaceConvert, -1, PREG_SPLIT_NO_EMPTY);
+
+            foreach ($keywords as $word) {
+                $query->where('posts.message', 'like', '%' . $word . '%');
+            }
+
+            return $query;
+        } else {
+            return;
+        }
+    }
 }

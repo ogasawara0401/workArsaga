@@ -14,15 +14,25 @@
               <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ $post->title }}</h1>
               <p class="leading-relaxed mb-3">{{ $post->message }}</p>
               <div class="flex items-center flex-wrap">
-                <span class="text-gray-400 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                  {{ $post->created_at }}
-                </span>
-                <span class="text-gray-400 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                  {{ $post->updated_at }}
-                </span>
-                <span class="text-gray-600 ml-3 mr-3 inline-flex items-center leading-none text-sm">
-                  {{ $user->name }}
-                </span>
+                <div>
+                  <span class="text-gray-400 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                    {{ $post->created_at }}
+                  </span>
+                  <span class="text-gray-400 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                    {{ $post->updated_at }}
+                  </span>
+                  <span class="text-gray-600 ml-3 mr-3 inline-flex items-center leading-none text-sm">
+                    {{ $user->name }}
+                  </span>
+                </div>
+                <div class="ml-auto">
+                  <button onclick="location.href='{{ route('post.edit', ['post' => $post->id]) }}'"
+                    class="text-white bg-green-400 border-0 py-2 px-8 focus:outline-none hover:bg-green-500 rounded text-lg">編集</button>
+                  <form class="inline" method="POST" action="{{ route('post.destroy', ['post' => $post->id]) }}">
+                    @csrf
+                    <button type="submit" class="text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-500 rounded text-lg">削除</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>

@@ -6,9 +6,17 @@
   </x-slot>
 
   <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-row-reverse">
+    <div class="max-w-7xl sm:px-6 lg:px-8 flex flex-row-reverse">
       <button class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg" onclick="location.href='{{ route('post.create') }}'">新規投稿</button>
     </div>
+    <form class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2" method="GET" action="{{ route('home') }}">
+      <div class="sm:col-span-2">
+        <label for="keyword" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">キーワード検索</label>
+        <input name="keyword" value="{{ \Request::get('keyword') }}" placeholder="キーワードを入力"
+          class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        <button class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">検索</button>
+      </div>
+    </form>
   </div>
   <section class="text-gray-600 body-font">
     <div class="container px-5 mx-auto">
