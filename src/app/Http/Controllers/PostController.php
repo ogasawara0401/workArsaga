@@ -50,17 +50,6 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -68,7 +57,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::where('user_id', Auth::id())->findOrFail($id);
+
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -80,7 +71,14 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->title = $request->title;
+        $post->message = $request->message;
+
+        $post->save();
+
+        return redirect()->route('post.index');
     }
 
     /**
@@ -91,6 +89,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->delete();
+
+        return redirect()->route('post.index');
     }
 }

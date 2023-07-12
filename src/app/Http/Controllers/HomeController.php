@@ -13,7 +13,8 @@ class HomeController extends Controller
         $posts = Post::select('posts.title', 'posts.message', 'posts.created_at', 'posts.updated_at', 'users.name')
             ->join('users', 'posts.user_id', '=', 'users.id')
             ->SearchKeyword($request->keyword)
-            ->get();
+            ->orderBy('created_at', 'desc')
+            ->Paginate(5);
 
         return view('home', compact('posts'));
     }

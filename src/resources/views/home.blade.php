@@ -9,17 +9,17 @@
     <div class="max-w-7xl sm:px-6 lg:px-8 flex flex-row-reverse">
       <button class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg" onclick="location.href='{{ route('post.create') }}'">新規投稿</button>
     </div>
-    <form class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2" method="GET" action="{{ route('home') }}">
-      <div class="sm:col-span-2">
+    <div class="mx-auto max-w-screen-md">
+      <form method="GET" action="{{ route('home') }}">
         <label for="keyword" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">キーワード検索</label>
         <input name="keyword" value="{{ \Request::get('keyword') }}" placeholder="キーワードを入力"
           class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
         <button class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">検索</button>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
   <section class="text-gray-600 body-font">
-    <div class="container px-5 mx-auto">
+    <div class="container px-5 pb-10 mx-auto">
       @foreach ($posts as $post)
         <div class="p-4">
           <div class="h-full border-2 border-gray-400 border-opacity-60 rounded-lg overflow-hidden">
@@ -41,5 +41,7 @@
           </div>
         </div>
       @endforeach
+      {{ $posts->links() }}
+    </div>
   </section>
 </x-app-layout>

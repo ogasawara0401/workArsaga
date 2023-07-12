@@ -30,7 +30,8 @@
                     class="text-white bg-green-400 border-0 py-2 px-8 focus:outline-none hover:bg-green-500 rounded text-lg">編集</button>
                   <form class="inline" method="POST" action="{{ route('post.destroy', ['post' => $post->id]) }}">
                     @csrf
-                    <button type="submit" class="text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-500 rounded text-lg">削除</button>
+                    @method('DELETE')
+                    <button type="submit" onclick="return check()" class="text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-500 rounded text-lg">削除</button>
                   </form>
                 </div>
               </div>
@@ -40,3 +41,14 @@
       @endforeach
   </section>
 </x-app-layout>
+
+<script type="text/javascript">
+  function check() {
+    var checked = confirm("削除しますか？");
+    if (checked == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+</script>
