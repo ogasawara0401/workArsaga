@@ -16,7 +16,8 @@ class PostFactory extends Factory
         return [
             'user_id' => $this->faker->numberBetween(1, 3),
             'title' => $this->faker->word(),
-            'message' => $this->faker->realText()
+            'message' => $this->faker->realText(),
+            'created_at' => $this->faker->dateTimeBetween('-1 week')
         ];
     }
 }

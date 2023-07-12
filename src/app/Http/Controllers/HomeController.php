@@ -14,7 +14,7 @@ class HomeController extends Controller
             ->join('users', 'posts.user_id', '=', 'users.id')
             ->SearchKeyword($request->keyword)
             ->orderBy('created_at', 'desc')
-            ->Paginate(5);
+            ->Paginate(10);
 
         return view('home', compact('posts'));
     }
