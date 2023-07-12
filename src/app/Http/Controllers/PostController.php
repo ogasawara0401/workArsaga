@@ -40,6 +40,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => ['required', 'max:50'],
+            'message' => ['required', 'max:1000']
+        ]);
+
         Post::create([
             'user_id' => Auth::id(),
             'title' => $request->title,
@@ -72,6 +77,11 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);
+
+        $request->validate([
+            'title' => ['required', 'max:50'],
+            'message' => ['required', 'max:1000']
+        ]);
 
         $post->title = $request->title;
         $post->message = $request->message;
